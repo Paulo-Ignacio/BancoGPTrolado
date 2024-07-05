@@ -58,20 +58,46 @@ def editar_usuario(cpf):
     else:
         print("Usuário não encontrado.")
 
-# Adicione a função fechar_conta aqui
-# Adicione a função consultar_saldo aqui
+def fechar_conta(cpf):
+    if cpf in usuarios:
+        del usuarios[cpf]
+        del contas[cpf]
+        print(f"Conta do usuário com CPF {cpf} fechada com sucesso.")
+    else:
+        print("Usuário não encontrado.")
 
-# Cadastro de usuários (exemplo)
-cadastrar_usuario("João", "12345678900")
-cadastrar_usuario("Maria", "09876543211")
+def consultar_saldo(cpf):
+    if cpf in contas:
+        print(f"Saldo atual da conta de {usuarios[cpf]['nome']} (CPF: {usuarios[cpf]['cpf']}): R${contas[cpf]['saldo']:.2f}")
+    else:
+        print("Usuário não encontrado.")
 
-# Realizar algumas operações (exemplo)
-depositar("12345678900", 1000.0)
-sacar("12345678900", 200.0)
-transferir("12345678900", "09876543211", 300.0)
+def menu():
+    while True:
+        print("\n=== Sistema Bancário ===")
+        print("[ 1 ] Cadastrar usuário")
+        print("[ 2 ] Consultar saldo")
+        print("[ 3 ] Depositar")
+        print("[ 4 ] Sacar")
+        print("[ 5 ] Transferir")
+        print("[ 6 ] Gerar extrato")
+        print("[ 7 ] Editar usuário")
+        print("[ 8 ] Fechar conta")
+        print("[ 9 ] Sair")
 
-# Gerar extratos (exemplo)
-gerar_extrato("12345678900")
-print()
-gerar_extrato("09876543211")
+        escolha = input("Escolha uma opção: ")
 
+        if escolha == "1":
+            nome = input("Digite o nome: ").strip()
+            cpf = input("Digite o CPF: ").strip()
+            cadastrar_usuario(nome, cpf)
+        elif escolha == "2":
+            cpf = input("Digite o CPF: ").strip()
+            consultar_saldo(cpf)
+        
+    
+        else:
+            print("Opção inválida. Tente novamente.")
+
+
+menu()
