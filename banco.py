@@ -14,18 +14,23 @@ def cadastrar_usuario(nome, cpf):
 
 def depositar(cpf, valor):
     if cpf in contas:
-        contas[cpf]["saldo"] += valor
-        contas[cpf]["extrato"].append(f"Depósito: +R${valor:.2f}")
+        if valor > 0:
+            contas[cpf]["saldo"] += valor
+            contas[cpf]["extrato"].append(f"Depósito: +R${valor:.2f}")
+            print(f"Depósito de R${valor:.2f} realizado com sucesso.")
+        else:
+            print("Valor de depósito deve ser positivo.")
     else:
         print("Usuário não encontrado.")
 
 def sacar(cpf, valor):
     if cpf in contas:
-        if valor > contas[cpf]["saldo"]:
-            print("Saldo insuficiente.")
-        else:
+        if valor <= contas[cpf]["saldo"]:
             contas[cpf]["saldo"] -= valor
             contas[cpf]["extrato"].append(f"Saque: -R${valor:.2f}")
+            print(f"Saque de R${valor:.2f} realizado com sucesso.")
+        else:
+            print("Saldo insuficiente para realizar o saque.")
     else:
         print("Usuário não encontrado.")
 
@@ -94,10 +99,14 @@ def menu():
         elif escolha == "2":
             cpf = input("Digite o CPF: ").strip()
             consultar_saldo(cpf)
-        
-    
+        elif escolha == "3":
+            cpf = input("Digite o CPF: ").strip()
+            valor = float(input("Digite o valor a depositar: "))
+            depositar(cpf, valor)
+        elif escolha == "4":
+            cpf = input("Digite o CPF: ").strip()
+            valor = float(input("Digite o valor a sacar: "))
+            sacar(cpf, valor)
         else:
             print("Opção inválida. Tente novamente.")
-
-
 menu()
