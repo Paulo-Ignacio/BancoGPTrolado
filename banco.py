@@ -118,9 +118,12 @@ def menu():
         elif escolha == "7":
             cpf = input("Digite o CPF: ").strip()
             editar_usuario(cpf)
-
-        # Funções do grupo 3 aqui
-
+        elif escolha == "8":
+            cpf = input("Digite o CPF: ").strip()
+            fechar_conta(cpf)
+        elif escolha == "9":
+            print("Saindo...")
+            break
         else:
             print("Opção inválida. Tente novamente.")
 menu()
