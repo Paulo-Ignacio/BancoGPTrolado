@@ -107,6 +107,20 @@ def menu():
             cpf = input("Digite o CPF: ").strip()
             valor = float(input("Digite o valor a sacar: "))
             sacar(cpf, valor)
+        elif escolha == "5":
+            cpf_origem = input("Digite o CPF de origem: ").strip()
+            cpf_destino = input("Digite o CPF de destino: ").strip()
+            valor = float(input("Digite o valor da transferência: ").strip())
+            transferir(cpf_origem, cpf_destino, valor)
+        elif escolha == "6": 
+            cpf = input("Digite o CPF: ").strip()
+            gerar_extrato(cpf)
+        elif escolha == "7":
+            cpf = input("Digite o CPF: ").strip()
+            editar_usuario(cpf)
+
+        # Funções do grupo 3 aqui
+
         else:
             print("Opção inválida. Tente novamente.")
 menu()
